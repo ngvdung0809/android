@@ -161,7 +161,7 @@ public class Next5Day extends Fragment {
 
     public void Get5DayData(){
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
-        String url="http://dataservice.accuweather.com/forecasts/v1/daily/5day/353412?apikey=KtXroA6bnEx3YVNpAzeSCBqusF6Gstqb&language=vi&metric=true";
+        String url="http://dataservice.accuweather.com/forecasts/v1/daily/5day/353412?apikey=RP37Tuafp3SCZro7STIzeIxgKpm2sPEF&language=vi&metric=true";
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

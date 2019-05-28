@@ -237,7 +237,7 @@ public class Today extends Fragment {
         //Toast.makeText(Activity_Today.this, "Kiểm tra kết nối mạng", Toast.LENGTH_SHORT).show();
         // thực thi các request sẽ gửi đi
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
-        String url="http://dataservice.accuweather.com/currentconditions/v1/353412?apikey=KtXroA6bnEx3YVNpAzeSCBqusF6Gstqb&language=vi&details=true";
+        String url="http://dataservice.accuweather.com/currentconditions/v1/353412?apikey=RP37Tuafp3SCZro7STIzeIxgKpm2sPEF&language=vi&details=true";
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

@@ -140,34 +140,33 @@ public class Hourly extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public String ConvertTime(long day){
-        Date date=new Date(day*1000L);
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH");
-        String Day=simpleDateFormat.format(date);
-        return Day;
-    }
 
     public void hourly(final LineChart lineChart){
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
-        String url="http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/353412?apikey=KtXroA6bnEx3YVNpAzeSCBqusF6Gstqb&language=vi&metric=true";
+        String url="http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/353412?apikey=RP37Tuafp3SCZro7STIzeIxgKpm2sPEF&language=vi&metric=true";
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
-                        //Log.d("kq",response);
+                        Log.d("kq",response);
                         try{
                             JSONArray jsonArray= new JSONArray(response);
                             ArrayList<Entry> entries=new ArrayList<>();
+                            final String[] hours={"1","2","3","4","5","6","7","8","9","10","11","12"};
+                            ValueFormatter valueFormatter=new ValueFormatter() {
+                                @Override
+                                public String getFormattedValue(float value) {
+                                    return hours[(int) value];
+                                }
+                            };
                             for(int i=0;i<12;i++){
                                 JSONObject hourly=jsonArray.getJSONObject(i);
-                                Long time=hourly.getLong("EpochDateTime");
-                                String hour=ConvertTime(time);
 
                                 JSONObject Temperature=hourly.getJSONObject("Temperature");
                                 Double temp=Temperature.getDouble("Value");
 
-                                entries.add(new Entry(Integer.parseInt(hour),temp.floatValue()));
+                                entries.add(new Entry(i,temp.floatValue()));
                             }
                             LineDataSet lineDataSet=new LineDataSet(entries,"nhiệt độ");
                             lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -180,6 +179,7 @@ public class Hourly extends Fragment {
 
                             // Controlling X axis( goi ra truc x)
                             XAxis xAxis = lineChart.getXAxis();
+                            xAxis.setValueFormatter(valueFormatter);
                             // Set the xAxis position to bottom. Default is top
                             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                             xAxis.setTextSize(15f);
