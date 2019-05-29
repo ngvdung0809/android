@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/theme2"
+    android:background="@drawable/theme3"
     tools:context=".Fragment.Today">
     <LinearLayout
         android:orientation="vertical"
